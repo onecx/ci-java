@@ -37,5 +37,5 @@ jobs:
         cp -R target/quarkus-app/quarkus deployments 2>/dev/null || :
     - uses: actions/upload-artifact@v1
       with:
-        name: Package
-        path: staging
+        name: Release package
+        path: deployments
