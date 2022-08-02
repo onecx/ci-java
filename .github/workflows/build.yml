@@ -4,8 +4,8 @@ on:
   workflow_call:
 
 jobs:
-  build:
-    name: maven
+  maven:
+    name: build and test
     runs-on: [ self-hosted, aws ]
     steps:
     - uses: actions/checkout@v3
@@ -27,7 +27,14 @@ jobs:
       run: mvn versions:set -DnewVersion=${{ steps.version.outputs.stdout }}
     - name: Build with Maven
       run: mvn -B clean package verify --file pom.xml
-    - run: mkdir staging && cp -R target staging
+    - run: |
+        mkdir deployments 
+        cp -R target/lib deployments
+        cp -R target/*-runner.jar deployments
+        cp -R target/quarkus-app/lib deployments
+        cp -R target/quarkus-app/*.jar deployments
+        cp -R target/quarkus-app/app deployments
+        cp -R target/quarkus-app/quarkus deployments
     - uses: actions/upload-artifact@v1
       with:
         name: Package
