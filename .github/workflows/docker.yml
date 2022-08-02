@@ -22,8 +22,6 @@ jobs:
       SAMO_DOCKER_SKIP_DEV: 'false'
       SAMO_DOCKER_REMOVE_INTERMEDIATE_IMG_SKIP: 'false'      
     steps:
-    - name: Use Docker in rootless mode.
-      uses: ScribeMD/rootless-docker@0.1.7
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0

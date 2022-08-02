@@ -24,8 +24,6 @@ jobs:
       SAMO_HELM_VALUES_RELEASE_TEMPLATE_LIST: "app.image.registry=${SAMO_DOCKER_RELEASE_REGISTRY},app.image.tag={{ .Release }},app.image.repository=1000kit/{{ .Name }}"
       SAMO_HELM_CHART_RELEASE_TEMPLATE_LIST: 'version={{ .Release }},appVersion={{ .Release }},name={{ .Name }}'
     steps:
-    - name: Use Docker in rootless mode.
-      uses: ScribeMD/rootless-docker@0.1.7
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
