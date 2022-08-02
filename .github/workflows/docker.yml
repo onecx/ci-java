@@ -33,7 +33,7 @@ jobs:
         username: ${{ secrets.HARBOR_USER }}
         password: ${{ secrets.HARBOR_TOKEN }}        
     - name: docker build
-      uses: lorislab/samo-action@v1
+      uses: lorislab/samo-action@v1.0.0
       with:
         entrypoint: samo
         args: project docker build -v debug
@@ -49,7 +49,7 @@ jobs:
     - name: Integration test
       run: mvn -B failsafe:integration-test failsafe:verify --file pom.xml
     - name: docker push
-      uses: lorislab/samo-action@v1
+      uses: lorislab/samo-action@v1.0.0
       with:
         entrypoint: samo
         args: project docker push -v debug 

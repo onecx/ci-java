@@ -20,7 +20,7 @@ jobs:
         maven-version: 3.8.6
     - name: Get project version
       id: version
-      uses: lorislab/samo-action@v1
+      uses: lorislab/samo-action@v1.0.0
       with:
         args: samo project version        
     - name: Set project version
