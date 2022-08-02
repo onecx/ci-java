@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/download-artifact@v3
-        with:
-          name: package    
+      with:
+        name: package    
     - name: docker build
       uses: lorislab/samo-action@v0.1.0-alpha4
       with:
