@@ -29,6 +29,6 @@ jobs:
       run: mvn -B clean package verify --file pom.xml
     - run: mkdir staging && cp -R target staging
     - uses: actions/upload-artifact@v1
-        with:
-          name: Package
-          path: staging
+      with:
+        name: Package
+        path: staging
