@@ -8,6 +8,7 @@ jobs:
     name: build and push
     runs-on: [ self-hosted, aws ]
     env:
+      DOCKER_CONFIG: $HOME/.docker
       SAMO_DOCKER_FILE: src/main/docker/Dockerfile
       SAMO_DOCKER_REGISTRY: harbor.1000kit.org
       SAMO_DOCKER_GROUP: '1000kit/'
