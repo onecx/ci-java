@@ -35,7 +35,7 @@ jobs:
       uses: lorislab/samo-action@v1.0.0
       with:
         entrypoint: samo
-        args: project helm release -v debug
+        args: project helm build -v debug
     - name: helm push
       uses: lorislab/samo-action@v1.0.0
       with:
