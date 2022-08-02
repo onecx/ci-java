@@ -11,9 +11,13 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
+        distribution: 'zulu'
         java-version: '11'
         cache: 'maven'
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v4.4
+      with:
+        maven-version: 3.8.6
     - name: Get project version
       id: version
       uses: lorislab/samo-action@v0.1.0-alpha4
