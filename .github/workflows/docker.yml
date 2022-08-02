@@ -16,9 +16,9 @@ jobs:
       uses: lorislab/samo-action@v0.1.0-alpha4
       with:
         entrypoint: samo
-        args: docker build -v debug
+        args: project docker build -v debug
     - name: docker push
       uses: lorislab/samo-action@v0.1.0-alpha4
       with:
         entrypoint: samo
-        args: docker push -v debug 
+        args: project docker push -v debug 
