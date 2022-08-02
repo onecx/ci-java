@@ -20,28 +20,16 @@ jobs:
         maven-version: 3.8.6
     - name: Get project version
       id: version
-      uses: lorislab/samo-action@v0.1.0-alpha4
+      uses: lorislab/samo-action@v1
       with:
         args: samo project version        
     - name: Set project version
       run: mvn versions:set -DnewVersion=${{ steps.version.outputs.stdout }}
     - name: Build with Maven
       run: mvn -B clean package verify --file pom.xml
-    # - run: |
-    #     mkdir deployments 
-    #     cp -R target/lib deployments 2>/dev/null || :
-    #     cp -R target/*-runner.jar deployments 2>/dev/null || :
-    #     cp -R target/quarkus-app/lib deployments 2>/dev/null || :
-    #     cp -R target/quarkus-app/*.jar deployments 2>/dev/null || :
-    #     cp -R target/quarkus-app/app deployments 2>/dev/null || :
-    #     cp -R target/quarkus-app/quarkus deployments 2>/dev/null || :
     - uses: actions/upload-artifact@v3
       with:
         name: package
-        # path: deployments
-        path: |
-          target/lib
-          target/*-runner.jar
-          target/quarkus-app
+        path: target
         retention-days: 1
         if-no-files-found: ignore
