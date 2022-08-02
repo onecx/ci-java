@@ -1,0 +1,24 @@
+name: quarkus
+
+on:
+  workflow_call:
+
+jobs:
+  docker:
+    name: build and push
+    runs-on: [ self-hosted, aws ]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/download-artifact@v3
+        with:
+          name: package    
+    - name: docker build
+      uses: lorislab/samo-action@v0.1.0-alpha4
+      with:
+        entrypoint: samo
+        args: docker build -v debug
+    - name: docker push
+      uses: lorislab/samo-action@v0.1.0-alpha4
+      with:
+        entrypoint: samo
+        args: docker push -v debug 

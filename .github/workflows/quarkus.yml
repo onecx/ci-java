@@ -27,15 +27,21 @@ jobs:
       run: mvn versions:set -DnewVersion=${{ steps.version.outputs.stdout }}
     - name: Build with Maven
       run: mvn -B clean package verify --file pom.xml
-    - run: |
-        mkdir deployments 
-        cp -R target/lib deployments 2>/dev/null || :
-        cp -R target/*-runner.jar deployments 2>/dev/null || :
-        cp -R target/quarkus-app/lib deployments 2>/dev/null || :
-        cp -R target/quarkus-app/*.jar deployments 2>/dev/null || :
-        cp -R target/quarkus-app/app deployments 2>/dev/null || :
-        cp -R target/quarkus-app/quarkus deployments 2>/dev/null || :
-    - uses: actions/upload-artifact@v1
+    # - run: |
+    #     mkdir deployments 
+    #     cp -R target/lib deployments 2>/dev/null || :
+    #     cp -R target/*-runner.jar deployments 2>/dev/null || :
+    #     cp -R target/quarkus-app/lib deployments 2>/dev/null || :
+    #     cp -R target/quarkus-app/*.jar deployments 2>/dev/null || :
+    #     cp -R target/quarkus-app/app deployments 2>/dev/null || :
+    #     cp -R target/quarkus-app/quarkus deployments 2>/dev/null || :
+    - uses: actions/upload-artifact@v3
       with:
-        name: Release package
-        path: deployments
+        name: package
+        # path: deployments
+        path: |
+          target/lib
+          target/*-runner.jar
+          target/quarkus-app
+        retention-days: 1
+        if-no-files-found: ignore
