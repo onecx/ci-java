@@ -29,12 +29,12 @@ jobs:
       run: mvn -B clean package verify --file pom.xml
     - run: |
         mkdir deployments 
-        cp -R target/lib deployments
-        cp -R target/*-runner.jar deployments
-        cp -R target/quarkus-app/lib deployments
-        cp -R target/quarkus-app/*.jar deployments
-        cp -R target/quarkus-app/app deployments
-        cp -R target/quarkus-app/quarkus deployments
+        cp -R target/lib deployments 2>/dev/null || :
+        cp -R target/*-runner.jar deployments 2>/dev/null || :
+        cp -R target/quarkus-app/lib deployments 2>/dev/null || :
+        cp -R target/quarkus-app/*.jar deployments 2>/dev/null || :
+        cp -R target/quarkus-app/app deployments 2>/dev/null || :
+        cp -R target/quarkus-app/quarkus deployments 2>/dev/null || :
     - uses: actions/upload-artifact@v1
       with:
         name: Package
