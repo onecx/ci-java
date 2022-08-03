@@ -8,11 +8,8 @@ jobs:
     name: build and push
     runs-on: [ self-hosted, aws ]
     container:
-      image: harbor.1000kit.org/1000kit/quarkus-build:v11
-      options: --user root
-      credentials:
-        username: ${{ secrets.HARBOR_USER }}
-        password: ${{ secrets.HARBOR_TOKEN }}    
+      image: ghcr.io/lorislab/samo:3.1.0
+      options: --user root 
     env:
       SAMO_DOCKER_REGISTRY: harbor.1000kit.org
       SAMO_DOCKER_RELEASE_REGISTRY: harbor.1000kit.org
