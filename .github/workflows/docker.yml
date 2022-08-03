@@ -7,6 +7,11 @@ jobs:
   docker:
     name: build and push
     runs-on: [ self-hosted, aws ]
+    container:
+      image: harbor.1000kit.org/1000kit/quarkus-build:v11
+      credentials:
+        username: ${{ secrets.HARBOR_USER }}
+        password: ${{ secrets.HARBOR_TOKEN }}    
     env:
       DOCKER_CONFIG: $HOME/.docker
       SAMO_DOCKER_FILE: src/main/docker/Dockerfile
@@ -36,23 +41,8 @@ jobs:
         username: ${{ secrets.HARBOR_USER }}
         password: ${{ secrets.HARBOR_TOKEN }}        
     - name: docker build
-      uses: lorislab/samo-action@v1.0.0
-      with:
-        entrypoint: samo
-        args: project docker build -v debug
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: '11'
-        cache: 'maven'
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v4.4
-      with:
-        maven-version: 3.8.6
+      run: samo project docker build -v debug
     - name: Integration test
       run: mvn -B failsafe:integration-test failsafe:verify --file pom.xml
     - name: docker push
-      uses: lorislab/samo-action@v1.0.0
-      with:
-        entrypoint: samo
-        args: project docker push -v debug 
+      run: samo project docker push -v debug 

@@ -7,6 +7,11 @@ jobs:
   docker:
     name: build and push
     runs-on: [ self-hosted, aws ]
+    container:
+      image: harbor.1000kit.org/1000kit/quarkus-build:v11
+      credentials:
+        username: ${{ secrets.HARBOR_USER }}
+        password: ${{ secrets.HARBOR_TOKEN }}    
     env:
       SAMO_DOCKER_REGISTRY: harbor.1000kit.org
       SAMO_DOCKER_RELEASE_REGISTRY: harbor.1000kit.org
@@ -32,12 +37,6 @@ jobs:
         name: package
         path: target      
     - name: helm build
-      uses: lorislab/samo-action@v1.0.0
-      with:
-        entrypoint: samo
-        args: project helm build -v debug
+      run: samo project helm build -v debug
     - name: helm push
-      uses: lorislab/samo-action@v1.0.0
-      with:
-        entrypoint: samo
-        args: project helm push -v debug 
+      run: samo project helm push -v debug 
