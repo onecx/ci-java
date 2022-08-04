@@ -8,7 +8,7 @@ jobs:
     name: build and push
     runs-on: [ self-hosted, aws ]
     container:
-      image: harbor.1000kit.org/1000kit/quarkus-build:v11
+      image: ghcr.io/1000kit/quarkus-build-image:v1-21.3-java11
       options: --user root
       credentials:
         username: ${{ secrets.HARBOR_USER }}
