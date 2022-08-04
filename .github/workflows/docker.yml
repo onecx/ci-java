@@ -10,9 +10,6 @@ jobs:
     container:
       image: ghcr.io/1000kit/quarkus-build-image:v1-21.3-java11
       options: --user root
-      credentials:
-        username: ${{ secrets.HARBOR_USER }}
-        password: ${{ secrets.HARBOR_TOKEN }}    
     env:
       DOCKER_CONFIG: $HOME/.docker
       SAMO_DOCKER_FILE: src/main/docker/Dockerfile
