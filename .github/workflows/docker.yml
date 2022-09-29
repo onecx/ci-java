@@ -6,10 +6,7 @@ on:
 jobs:
   docker:
     name: build and push
-    runs-on: [ self-hosted, aws ]
-    container:
-      image: ghcr.io/1000kit/quarkus-build-image:v1-21.3-java11
-      options: --user root
+    runs-on: [ self-hosted, samo ]
     env:
       DOCKER_CONFIG: $HOME/.docker
       SAMO_DOCKER_FILE: src/main/docker/Dockerfile
