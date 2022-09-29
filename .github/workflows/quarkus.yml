@@ -6,7 +6,10 @@ on:
 jobs:
   maven:
     name: build and test
-    runs-on: [ self-hosted, samo ]
+    runs-on: [ self-hosted, aws ]
+    container:
+      image: ghcr.io/1000kit/quarkus-build-image:v1-21.3-java11
+      options: --user root
     steps:
     - uses: actions/checkout@v3
       with:
